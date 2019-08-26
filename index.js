@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const email = require('./helper/sendEmail');
 
 const app = express();
 
@@ -36,8 +37,7 @@ app.get('/', (req, res) => {
 app.post('/user', (req, res) => {
   const payload = { ...req.body };
   
-  User.create(payload, (err, value) => {
-    // console.log(err)
+  User.create(payload, async (err, value) => {
     if (err) {
       return res.send({
         'success': false,
@@ -47,6 +47,7 @@ app.post('/user', (req, res) => {
       })
     }
 
+    await email.sendMailRegister(payload);
     res.send({
       'success': true,
       'code': 200,
