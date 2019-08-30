@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const email = require('./helper/sendEmail');
+const send = require('./helper/sendEmail');
 
 const app = express();
 
@@ -47,7 +47,7 @@ app.post('/user', (req, res) => {
       })
     }
 
-    await email.sendMailRegister(payload);
+    await send.sendMailRegister(payload);
     res.send({
       'success': true,
       'code': 200,

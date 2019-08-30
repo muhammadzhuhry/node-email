@@ -16,9 +16,9 @@ module.exports = {
     const transporter = await nodemailer.createTransport(config);
     const mail = {
       to: payload.email,
-      from: 'node-email.test@gmail.com <no-reply@node-email.com>',
-      subject: 'Node Email Registration',
-      html: mustache.to_html(template, { ...payload }),
+      from: 'node-email@gmail.com',
+      subject: '[Node Email] - Success Registration',
+      html: mustache.to_html(template, { ...payload })
     };
     transporter.sendMail(mail);
   }
